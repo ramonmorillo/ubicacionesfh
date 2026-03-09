@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Localizador de Medicamentos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Localizador de Medicamentos</h1>
+      <p>Busca por código, nombre o ubicación para localizar rápido durante guardia.</p>
+    </header>
+
+    <section class="search-box">
+      <input id="searchInput" type="search" placeholder="Ej: adalimumab, 954065, NEVERAT..." autocomplete="off" />
+      <p id="resultsCount"></p>
+    </section>
+
+    <section id="results" class="results"></section>
+  </main>
+
+  <template id="cardTemplate">
+    <article class="card">
+      <h2 class="nombre"></h2>
+      <dl>
+        <div><dt>Código</dt><dd class="codigo"></dd></div>
+        <div><dt>Almacén</dt><dd class="almacen"></dd></div>
+        <div><dt>Ubicación</dt><dd class="ubicacion"></dd></div>
+        <div><dt>Posición</dt><dd class="posicion"></dd></div>
+      </dl>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
