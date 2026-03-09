@@ -158,6 +158,43 @@ async function copyToClipboard(text) {
   document.body.removeChild(textarea);
 }
 
+
+function extractCodigoNacional(item) {
+  const cnFields = [
+    item.cn,
+    item.codigo_nacional,
+    item.codigoNacional,
+    item.cod_nacional,
+    item.codigo_nac,
+    item.c_n,
+  ];
+
+  for (const candidate of cnFields) {
+    const digits = String(candidate || '').replace(/\D/g, '');
+    if (digits.length >= 6 && digits.length <= 8) return digits;
+  }
+
+  return '';
+}
+
+function buildCimaUrl(item) {
+  const cn = extractCodigoNacional(item);
+  if (cn) {
+    return {
+      label: 'Ver ficha técnica',
+      href: `https://cima.aemps.es/cima/publico/lista.html?keyword=${encodeURIComponent(cn)}`,
+    };
+  }
+
+  const nombre = (item.nombre || '').trim();
+  if (!nombre || nombre.length < 3) return null;
+
+  return {
+    label: 'Buscar en CIMA',
+    href: `https://cima.aemps.es/cima/publico/lista.html?keyword=${encodeURIComponent(nombre)}`,
+  };
+}
+
 function buildCopyText(item, parsedLocation, details) {
   const lines = [item.nombre || '(Sin nombre)', parsedLocation.zoneLabel];
   if (details.length) lines.push(details.join(' · '));
@@ -201,6 +238,15 @@ function render(items, query = '') {
     }
 
     card.querySelector('.codigo').textContent = `Código ${med.codigo || 'No disponible'}`;
+
+    const cimaButton = card.querySelector('.cima-button');
+    const cimaLink = buildCimaUrl(med);
+    if (cimaLink) {
+      cimaButton.textContent = cimaLink.label;
+      cimaButton.href = cimaLink.href;
+    } else {
+      cimaButton.remove();
+    }
 
     const copyButton = card.querySelector('.copy-button');
     copyButton.addEventListener('click', async () => {
