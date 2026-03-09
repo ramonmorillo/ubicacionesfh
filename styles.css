@@ -172,6 +172,32 @@ h1 {
   color: #12263f;
 }
 
+
+.card-actions {
+  display: flex;
+  gap: .34rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.cima-button {
+  border: 1px solid #c5d7ef;
+  background: #eef5ff;
+  color: #174c88;
+  border-radius: 8px;
+  font-size: .73rem;
+  font-weight: 600;
+  padding: .24rem .5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cima-button:hover,
+.cima-button:focus-visible {
+  background: #dce9fb;
+}
+
 .copy-button {
   border: 1px solid #c8d5e8;
   background: #f7f9fd;
