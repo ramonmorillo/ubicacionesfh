@@ -242,6 +242,21 @@ def load_rows(path: Path) -> List[Dict[str, str]]:
     return out
 
 
+def extract_cn(record: Dict[str, str]) -> str:
+    cn_fields = [
+        'codigo_nacional',
+        'cod_nacional',
+        'cn',
+        'codigo_nac',
+        'codigo_nacional_completo',
+    ]
+    for field in cn_fields:
+        digits = ''.join(ch for ch in clean_value(record.get(field, '')) if ch.isdigit())
+        if 6 <= len(digits) <= 8:
+            return digits
+    return ''
+
+
 def build(records: Iterable[Dict[str, str]]) -> List[Dict[str, str]]:
     by_core_key: Dict[Tuple[str, str, str, str], Dict[str, str]] = {}
 
@@ -252,6 +267,8 @@ def build(records: Iterable[Dict[str, str]]) -> List[Dict[str, str]]:
         ubicacion = normalize_zone(r.get('ubica', r.get('ubicacion', '')))
         posicion = clean_value(r.get('id_estante', r.get('posicion', '')))
 
+        codigo_nacional = extract_cn(r)
+
         core_key = (codigo, nombre, ubicacion, posicion)
         candidate = {
             'codigo': codigo,
@@ -259,6 +276,7 @@ def build(records: Iterable[Dict[str, str]]) -> List[Dict[str, str]]:
             'almacen': almacen,
             'ubicacion': ubicacion,
             'posicion': posicion,
+            'codigo_nacional': codigo_nacional,
         }
 
         existing = by_core_key.get(core_key)
@@ -268,10 +286,21 @@ def build(records: Iterable[Dict[str, str]]) -> List[Dict[str, str]]:
 
         if not existing.get('almacen') and candidate.get('almacen'):
             by_core_key[core_key] = candidate
+            continue
+
+        if not existing.get('codigo_nacional') and candidate.get('codigo_nacional'):
+            existing['codigo_nacional'] = candidate['codigo_nacional']
 
     out = []
     for row in by_core_key.values():
-        row['searchText'] = norm(' '.join([row['codigo'], row['nombre'], row['almacen'], row['ubicacion'], row['posicion']]))
+        row['searchText'] = norm(' '.join([
+            row['codigo'],
+            row['codigo_nacional'],
+            row['nombre'],
+            row['almacen'],
+            row['ubicacion'],
+            row['posicion'],
+        ]))
         out.append(row)
 
     out.sort(key=lambda x: (x['nombre'], x['codigo']))
