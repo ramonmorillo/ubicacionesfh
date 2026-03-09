@@ -3861,6 +3861,15 @@
     "searchText": "666107 666107 ibuprofeno susp 100 mg/5 ml f/200ml farmacia valme carrusel"
   },
   {
+    "codigo": "709157",
+    "nombre": "IDARUCIZUMAB vial 2,5 g / 50 mL*",
+    "almacen": "Botiquin Tomillar",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "709157",
+    "searchText": "709157 709157 idarucizumab vial 2,5 g / 50 ml* botiquin tomillar nevera"
+  },
+  {
     "codigo": "000041",
     "nombre": "IDEBENONA cap 300 mg FM",
     "almacen": "Farmacia Valme",
@@ -6390,6 +6399,15 @@
     "searchText": "000001 000001 ranibizumab jer intravitrea 0,5 mg/0,05 ml farmacia valme nevera"
   },
   {
+    "codigo": "837310",
+    "nombre": "RASBURICASA iny 1,5 mg*",
+    "almacen": "Almacenes APD",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "837310",
+    "searchText": "837310 837310 rasburicasa iny 1,5 mg* almacenes apd nevera"
+  },
+  {
     "codigo": "731120",
     "nombre": "RAVULIZUMAB vial 300 mg /3 mL",
     "almacen": "Farmacia Valme",
@@ -7272,6 +7290,24 @@
     "searchText": "013229 013229 tas-102 (trifluridina/tipiracilo) comp 15/6 mg* farmacia valme pacientes externos"
   },
   {
+    "codigo": "017399",
+    "nombre": "TECLISTAMAB 153mg/1,7mL iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "017399",
+    "searchText": "017399 017399 teclistamab 153mg/1,7ml iny farmacia valme nevera"
+  },
+  {
+    "codigo": "017412",
+    "nombre": "TECLISTAMAB 30mg/3mL iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "017412",
+    "searchText": "017412 017412 teclistamab 30mg/3ml iny farmacia valme nevera"
+  },
+  {
     "codigo": "706088",
     "nombre": "TEDIZOLID comp 200 mg",
     "almacen": "Farmacia Valme",
@@ -7344,6 +7380,15 @@
     "searchText": "700742 700742 teriflunomida comp 14 mg* farmacia valme pacientes externos"
   },
   {
+    "codigo": "673673",
+    "nombre": "TERLIPRESINA iny 1 mg*",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "673673",
+    "searchText": "673673 673673 terlipresina iny 1 mg* farmacia valme nevera"
+  },
+  {
     "codigo": "665273",
     "nombre": "TEST HELICOBACTER comp 100 mg",
     "almacen": "Farmacia Valme",
@@ -7369,6 +7414,24 @@
     "posicion": "",
     "codigo_nacional": "896852",
     "searchText": "896852 896852 tetracaina sol 1% c/a farmacia valme carrusel"
+  },
+  {
+    "codigo": "797191",
+    "nombre": "TETRACOSACTIDO DEPOT iny 1mg/1ml",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "797191",
+    "searchText": "797191 797191 tetracosactido depot iny 1mg/1ml farmacia valme nevera"
+  },
+  {
+    "codigo": "012096",
+    "nombre": "TETRACOSACTIDO iny 0,25 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "012096",
+    "searchText": "012096 012096 tetracosactido iny 0,25 mg farmacia valme nevera"
   },
   {
     "codigo": "762356",
@@ -7407,6 +7470,15 @@
     "searchText": "653914 653914 tigeciclina vial 50 mg* farmacia valme carrusel"
   },
   {
+    "codigo": "723855",
+    "nombre": "TILDRAKIZUMAB 100 mg jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "723855",
+    "searchText": "723855 723855 tildrakizumab 100 mg jer precg farmacia valme nevera"
+  },
+  {
     "codigo": "017292",
     "nombre": "TIOPRONINA comp 250mg",
     "almacen": "Farmacia Valme",
@@ -7425,6 +7497,24 @@
     "searchText": "812461 812461 tirofiban iny 12,5 mg farmacia valme carrusel"
   },
   {
+    "codigo": "661936",
+    "nombre": "TOCILIZUMAB IV vial 200 mg/10 mL",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "661936",
+    "searchText": "661936 661936 tocilizumab iv vial 200 mg/10 ml farmacia valme nevera"
+  },
+  {
+    "codigo": "702285",
+    "nombre": "TOCILIZUMAB SC jer precg 162 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "702285",
+    "searchText": "702285 702285 tocilizumab sc jer precg 162 mg farmacia valme nevera"
+  },
+  {
     "codigo": "715785",
     "nombre": "TOFACITINIB comp 5 mg*",
     "almacen": "Farmacia Valme",
@@ -7432,6 +7522,15 @@
     "posicion": "",
     "codigo_nacional": "715785",
     "searchText": "715785 715785 tofacitinib comp 5 mg* farmacia valme pacientes externos"
+  },
+  {
+    "codigo": "765133",
+    "nombre": "TOFERSEN vial 100 mg /15 mL",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "765133",
+    "searchText": "765133 765133 tofersen vial 100 mg /15 ml farmacia valme nevera"
   },
   {
     "codigo": "706998",
@@ -7450,6 +7549,24 @@
     "posicion": "",
     "codigo_nacional": "663726",
     "searchText": "663726 663726 tolvaptan comp 30 mg farmacia valme pacientes externos"
+  },
+  {
+    "codigo": "888172",
+    "nombre": "TOXINA BOTULINICA A iny 100 UI",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "888172",
+    "searchText": "888172 888172 toxina botulinica a iny 100 ui farmacia valme nevera"
+  },
+  {
+    "codigo": "678599",
+    "nombre": "TOXINA BOTULINICA A iny 500 UI (Dysport)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "678599",
+    "searchText": "678599 678599 toxina botulinica a iny 500 ui (dysport) farmacia valme nevera"
   },
   {
     "codigo": "642751",
@@ -7497,6 +7614,42 @@
     "searchText": "622100 622100 tranexamico amp 500 mg farmacia valme carrusel"
   },
   {
+    "codigo": "907352",
+    "nombre": "TRASTUZUMAB iny 150 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "907352",
+    "searchText": "907352 907352 trastuzumab iny 150 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "699409",
+    "nombre": "TRASTUZUMAB iny SUBCUTANEO 600 mg/5mL",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "699409",
+    "searchText": "699409 699409 trastuzumab iny subcutaneo 600 mg/5ml farmacia valme nevera"
+  },
+  {
+    "codigo": "701101",
+    "nombre": "TRASTUZUMAB-EMTANSINA iny 100 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "701101",
+    "searchText": "701101 701101 trastuzumab-emtansina iny 100 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "701103",
+    "nombre": "TRASTUZUMAB-EMTANSINA iny 160 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "701103",
+    "searchText": "701103 701103 trastuzumab-emtansina iny 160 mg farmacia valme nevera"
+  },
+  {
     "codigo": "838532",
     "nombre": "TRAZODONA comp 100 mg",
     "almacen": "Farmacia Valme",
@@ -7504,6 +7657,15 @@
     "posicion": "",
     "codigo_nacional": "838532",
     "searchText": "838532 838532 trazodona comp 100 mg farmacia valme carrusel"
+  },
+  {
+    "codigo": "017715",
+    "nombre": "TREMELIMUMAB 300 mg/15 mL vial",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "017715",
+    "searchText": "017715 017715 tremelimumab 300 mg/15 ml vial farmacia valme nevera"
   },
   {
     "codigo": "824268",
@@ -7522,6 +7684,15 @@
     "posicion": "",
     "codigo_nacional": "839597",
     "searchText": "839597 839597 triamcinolona depot iny 40 mg farmacia valme carrusel"
+  },
+  {
+    "codigo": "685461",
+    "nombre": "TUBERCULINA PPD iny 30 UT/1,5 mL",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "685461",
+    "searchText": "685461 685461 tuberculina ppd iny 30 ut/1,5 ml farmacia valme nevera"
   },
   {
     "codigo": "730461",
@@ -7561,12 +7732,21 @@
   },
   {
     "codigo": "759433",
-    "nombre": "Tebentafusp 100 mcg/",
+    "nombre": "Tebentafusp 100 mcg/0,5 mL vial#",
     "almacen": "Farmacia Valme",
     "ubicacion": "NEVERA",
     "posicion": "",
     "codigo_nacional": "759433",
-    "searchText": "759433 759433 tebentafusp 100 mcg/ farmacia valme nevera"
+    "searchText": "759433 759433 tebentafusp 100 mcg/0,5 ml vial# farmacia valme nevera"
+  },
+  {
+    "codigo": "665854",
+    "nombre": "Tiotepa 15mg iny #",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "665854",
+    "searchText": "665854 665854 tiotepa 15mg iny # farmacia valme nevera"
   },
   {
     "codigo": "016098",
@@ -7578,6 +7758,24 @@
     "searchText": "016098 016098 tiratricol comp 350 mcg# farmacia valme carrusel"
   },
   {
+    "codigo": "792440",
+    "nombre": "Tirotropina alfa iny 0,9 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "792440",
+    "searchText": "792440 792440 tirotropina alfa iny 0,9 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "753699",
+    "nombre": "Tobramicina inhalada jer 300 mg#",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "753699",
+    "searchText": "753699 753699 tobramicina inhalada jer 300 mg# farmacia valme nevera"
+  },
+  {
     "codigo": "659908",
     "nombre": "Toxina botulinica A iny 100 UI (XEOMIN)",
     "almacen": "Farmacia Valme",
@@ -7585,6 +7783,15 @@
     "posicion": "",
     "codigo_nacional": "659908",
     "searchText": "659908 659908 toxina botulinica a iny 100 ui (xeomin) farmacia valme carrusel"
+  },
+  {
+    "codigo": "763390",
+    "nombre": "Tralokinumab 300 mg pluma precg#",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "763390",
+    "searchText": "763390 763390 tralokinumab 300 mg pluma precg# farmacia valme nevera"
   },
   {
     "codigo": "727696",
@@ -7612,6 +7819,15 @@
     "posicion": "",
     "codigo_nacional": "728144",
     "searchText": "728144 728144 trientina comp 150 mg# farmacia valme pacientes externos"
+  },
+  {
+    "codigo": "763751",
+    "nombre": "UBLITUXIMAB iny 150 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "763751",
+    "searchText": "763751 763751 ublituximab iny 150 mg farmacia valme nevera"
   },
   {
     "codigo": "727711",
@@ -7677,6 +7893,267 @@
     "searchText": "957639 957639 ursodesoxicolico cap 150 mg farmacia valme carrusel"
   },
   {
+    "codigo": "662133",
+    "nombre": "USTEKINUMAB jer precg 45 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "662133",
+    "searchText": "662133 662133 ustekinumab jer precg 45 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "713432",
+    "nombre": "USTEKINUMAB jer precg 90 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "713432",
+    "searchText": "713432 713432 ustekinumab jer precg 90 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "713947",
+    "nombre": "USTEKINUMAB vial 130 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "713947",
+    "searchText": "713947 713947 ustekinumab vial 130 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "763234",
+    "nombre": "VACUNA COVID-19 vial (ADULTOS)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "763234",
+    "searchText": "763234 763234 vacuna covid-19 vial (adultos) farmacia valme nevera"
+  },
+  {
+    "codigo": "765444",
+    "nombre": "VACUNA COVID-19 vial (INFANTIL 10mcg)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "765444",
+    "searchText": "765444 765444 vacuna covid-19 vial (infantil 10mcg) farmacia valme nevera"
+  },
+  {
+    "codigo": "765445",
+    "nombre": "VACUNA COVID-19 vial (INFANTIL 3mcg)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "765445",
+    "searchText": "765445 765445 vacuna covid-19 vial (infantil 3mcg) farmacia valme nevera"
+  },
+  {
+    "codigo": "664727",
+    "nombre": "VACUNA DTPa acelular jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "664727",
+    "searchText": "664727 664727 vacuna dtpa acelular jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "017125",
+    "nombre": "VACUNA ENCEFALITIS JAPONESA jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "017125",
+    "searchText": "017125 017125 vacuna encefalitis japonesa jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "014046",
+    "nombre": "VACUNA ENCEFALITIS PRIMAV-VERANO jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "014046",
+    "searchText": "014046 014046 vacuna encefalitis primav-verano jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "654297",
+    "nombre": "VACUNA FIEBRE AMARILLA iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "654297",
+    "searchText": "654297 654297 vacuna fiebre amarilla iny farmacia valme nevera"
+  },
+  {
+    "codigo": "669317",
+    "nombre": "VACUNA GRIPE ESTACIONAL jer monodosis",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "669317",
+    "searchText": "669317 669317 vacuna gripe estacional jer monodosis farmacia valme nevera"
+  },
+  {
+    "codigo": "600536",
+    "nombre": "VACUNA HAEMOPHILUS INFLUEN. tipo B jer",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "600536",
+    "searchText": "600536 600536 vacuna haemophilus influen. tipo b jer farmacia valme nevera"
+  },
+  {
+    "codigo": "676858",
+    "nombre": "VACUNA HEPATITIS A 1440 UI jer (ADULTOS)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "676858",
+    "searchText": "676858 676858 vacuna hepatitis a 1440 ui jer (adultos) farmacia valme nevera"
+  },
+  {
+    "codigo": "673921",
+    "nombre": "VACUNA HEPATITIS A 720 UI jer (INFANTIL)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "673921",
+    "searchText": "673921 673921 vacuna hepatitis a 720 ui jer (infantil) farmacia valme nevera"
+  },
+  {
+    "codigo": "686709",
+    "nombre": "VACUNA HEPATITIS B (20MCG) ADULTO jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "686709",
+    "searchText": "686709 686709 vacuna hepatitis b (20mcg) adulto jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "997569",
+    "nombre": "VACUNA HEPATITIS B infantil jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "997569",
+    "searchText": "997569 997569 vacuna hepatitis b infantil jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "729304",
+    "nombre": "VACUNA HERPES ZOSTER iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "729304",
+    "searchText": "729304 729304 vacuna herpes zoster iny farmacia valme nevera"
+  },
+  {
+    "codigo": "698078",
+    "nombre": "VACUNA HEXAVALENTE jer precg 0,5 mL",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "698078",
+    "searchText": "698078 698078 vacuna hexavalente jer precg 0,5 ml farmacia valme nevera"
+  },
+  {
+    "codigo": "701257",
+    "nombre": "VACUNA MENINGOCOCO B jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "701257",
+    "searchText": "701257 701257 vacuna meningococo b jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "677725",
+    "nombre": "VACUNA MENINGOCOCO TETRAVALENTE iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "677725",
+    "searchText": "677725 677725 vacuna meningococo tetravalente iny farmacia valme nevera"
+  },
+  {
+    "codigo": "732860",
+    "nombre": "VACUNA NEUMOCOCO 20 val jer (PREVENAR 20)",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "732860",
+    "searchText": "732860 732860 vacuna neumococo 20 val jer (prevenar 20) farmacia valme nevera"
+  },
+  {
+    "codigo": "638866",
+    "nombre": "VACUNA PAPILOMAVIRUS jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "638866",
+    "searchText": "638866 638866 vacuna papilomavirus jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "729081",
+    "nombre": "VACUNA POLIO iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "729081",
+    "searchText": "729081 729081 vacuna polio iny farmacia valme nevera"
+  },
+  {
+    "codigo": "834101",
+    "nombre": "VACUNA RABIA inactivada vial",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "834101",
+    "searchText": "834101 834101 vacuna rabia inactivada vial farmacia valme nevera"
+  },
+  {
+    "codigo": "661543",
+    "nombre": "VACUNA ROTAVIRUS susp oral",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "661543",
+    "searchText": "661543 661543 vacuna rotavirus susp oral farmacia valme nevera"
+  },
+  {
+    "codigo": "708172",
+    "nombre": "VACUNA SArampion+ RUbeola+PArotiditis",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "708172",
+    "searchText": "708172 708172 vacuna sarampion+ rubeola+parotiditis farmacia valme nevera"
+  },
+  {
+    "codigo": "917641",
+    "nombre": "VACUNA TETANO-DIFTERIA jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "917641",
+    "searchText": "917641 917641 vacuna tetano-difteria jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "668822",
+    "nombre": "VACUNA VARICELA jer precg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "668822",
+    "searchText": "668822 668822 vacuna varicela jer precg farmacia valme nevera"
+  },
+  {
+    "codigo": "017445",
+    "nombre": "VACUNA VIRUELA DEL MONO iny",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "017445",
+    "searchText": "017445 017445 vacuna viruela del mono iny farmacia valme nevera"
+  },
+  {
     "codigo": "617480",
     "nombre": "VALPROICO comp 500 mg",
     "almacen": "Farmacia Valme",
@@ -7729,6 +8206,24 @@
     "posicion": "",
     "codigo_nacional": "743898",
     "searchText": "743898 743898 vancomicina iny 500 mg farmacia valme carrusel"
+  },
+  {
+    "codigo": "99999",
+    "nombre": "VANCOMICINA solucion oral 125 mg/2,5 mL jer FM",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "",
+    "searchText": "99999 vancomicina solucion oral 125 mg/2,5 ml jer fm farmacia valme nevera"
+  },
+  {
+    "codigo": "702821",
+    "nombre": "VEDOLIZUMAB iny 300 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "702821",
+    "searchText": "702821 702821 vedolizumab iny 300 mg farmacia valme nevera"
   },
   {
     "codigo": "728931",
@@ -7866,6 +8361,24 @@
     "searchText": "881714 881714 voriconazol iny 200 mg* farmacia valme carrusel"
   },
   {
+    "codigo": "732557",
+    "nombre": "VOSORITIDA iny 0,56 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "732557",
+    "searchText": "732557 732557 vosoritida iny 0,56 mg farmacia valme nevera"
+  },
+  {
+    "codigo": "732559",
+    "nombre": "VOSORITIDA iny 1,2 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "732559",
+    "searchText": "732559 732559 vosoritida iny 1,2 mg farmacia valme nevera"
+  },
+  {
     "codigo": "758817",
     "nombre": "VUTRISIRAN jer precg 25 mg",
     "almacen": "Farmacia Valme",
@@ -7911,6 +8424,15 @@
     "searchText": "907253 907253 zidovudina susp 10 mg/ml f/200 ml farmacia valme carrusel"
   },
   {
+    "codigo": "763948",
+    "nombre": "ZILUCOPLAN jer precg 32,4 mg",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "763948",
+    "searchText": "763948 763948 zilucoplan jer precg 32,4 mg farmacia valme nevera"
+  },
+  {
     "codigo": "779595",
     "nombre": "ZOLEDRONICO iny 4 mg",
     "almacen": "Farmacia Valme",
@@ -7945,5 +8467,14 @@
     "posicion": "",
     "codigo_nacional": "600071",
     "searchText": "600071 600071 zinc acetato cap 25mg# farmacia valme pacientes externos"
+  },
+  {
+    "codigo": "018957",
+    "nombre": "Zolbetuximab iny 100 mg#",
+    "almacen": "Farmacia Valme",
+    "ubicacion": "NEVERA",
+    "posicion": "",
+    "codigo_nacional": "018957",
+    "searchText": "018957 018957 zolbetuximab iny 100 mg# farmacia valme nevera"
   }
 ]

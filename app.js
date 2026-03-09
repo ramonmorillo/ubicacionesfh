@@ -395,10 +395,24 @@ function applySearchAndFilters() {
     return;
   }
 
-  const ranked = filtered
+  let ranked = filtered
     .map((item) => ({ item, score: scoreItem(item, query) }))
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score || normalize(a.item.nombre).localeCompare(normalize(b.item.nombre)));
+
+  const nameTokenPrefixMatches = ranked.filter((entry) =>
+    normalize(entry.item.nombre)
+      .split(' ')
+      .some((token) => token.startsWith(query))
+  );
+  if (nameTokenPrefixMatches.length) {
+    ranked = nameTokenPrefixMatches;
+  } else {
+    const nameMatches = ranked.filter((entry) => normalize(entry.item.nombre).includes(query));
+    if (nameMatches.length) {
+      ranked = nameMatches;
+    }
+  }
 
   render(dedupeForRender(ranked.map((entry) => entry.item)), input.value.trim());
   updateActiveFiltersText();

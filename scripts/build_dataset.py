@@ -143,37 +143,103 @@ class BiffWorkbook:
             out.append((name, bof))
         return out
 
-    def _shared_strings(self) -> List[str]:
-        sst = []
+    def _iter_records(self) -> Iterable[Tuple[int, bytes]]:
         p = 0
         while p + 4 <= len(self.data):
             t, l = struct.unpack_from('<HH', self.data, p)
             p += 4
             r = self.data[p : p + l]
             p += l
-            if t != 0x00FC:
+            yield t, r
+
+    def _shared_strings(self) -> List[str]:
+        records = list(self._iter_records())
+        sst = []
+
+        for idx, (rtype, rec) in enumerate(records):
+            if rtype != 0x00FC:
                 continue
-            uniq = struct.unpack_from('<I', r, 4)[0]
-            i = 8
-            while i < len(r) and len(sst) < uniq:
-                if i + 3 > len(r):
+
+            fragments = [rec]
+            j = idx + 1
+            while j < len(records) and records[j][0] == 0x003C:
+                fragments.append(records[j][1])
+                j += 1
+
+            if len(rec) < 8:
+                continue
+
+            uniq = struct.unpack_from('<I', rec, 4)[0]
+            frag_i, frag_off = 0, 8
+
+            def read_raw(n: int) -> bytes:
+                nonlocal frag_i, frag_off
+                out = bytearray()
+                while n > 0 and frag_i < len(fragments):
+                    frag = fragments[frag_i]
+                    avail = len(frag) - frag_off
+                    if avail <= 0:
+                        frag_i += 1
+                        frag_off = 0
+                        continue
+                    take = min(n, avail)
+                    out.extend(frag[frag_off : frag_off + take])
+                    frag_off += take
+                    n -= take
+                return bytes(out)
+
+            def read_char_data(cch: int, initial_unicode: bool) -> str:
+                nonlocal frag_i, frag_off
+                chars: List[str] = []
+                unicode_mode = bool(initial_unicode)
+
+                while len(chars) < cch and frag_i < len(fragments):
+                    frag = fragments[frag_i]
+                    if frag_off >= len(frag):
+                        frag_i += 1
+                        frag_off = 0
+                        if frag_i >= len(fragments):
+                            break
+                        mode = read_raw(1)
+                        if not mode:
+                            break
+                        unicode_mode = bool(mode[0] & 0x01)
+                        continue
+
+                    if unicode_mode:
+                        chunk = read_raw(2)
+                        if len(chunk) < 2:
+                            break
+                        chars.append(chunk.decode('utf-16le', errors='ignore'))
+                    else:
+                        chunk = read_raw(1)
+                        if len(chunk) < 1:
+                            break
+                        chars.append(chunk.decode('latin1', errors='ignore'))
+
+                return ''.join(chars)
+
+            while len(sst) < uniq:
+                head = read_raw(3)
+                if len(head) < 3:
                     break
-                cch = struct.unpack_from('<H', r, i)[0]
-                i += 2
-                flags = r[i]
-                i += 1
+                cch = struct.unpack_from('<H', head, 0)[0]
+                flags = head[2]
                 uni = flags & 1
                 rich = flags & 0x08
                 ext = flags & 0x04
-                rr = struct.unpack_from('<H', r, i)[0] if rich else 0
-                i += 2 if rich else 0
-                ex = struct.unpack_from('<I', r, i)[0] if ext else 0
-                i += 4 if ext else 0
-                n = cch * (2 if uni else 1)
-                txt = r[i : i + n]
-                i += n
-                sst.append(txt.decode('utf-16le' if uni else 'latin1', errors='ignore'))
-                i += rr * 4 + ex
+
+                rr = struct.unpack('<H', read_raw(2))[0] if rich else 0
+                ex = struct.unpack('<I', read_raw(4))[0] if ext else 0
+                sst.append(read_char_data(cch, bool(uni)))
+
+                if rr:
+                    read_raw(rr * 4)
+                if ex:
+                    read_raw(ex)
+
+            break
+
         return sst
 
     def parse_sheet_rows(self, bof: int) -> List[List[str]]:
