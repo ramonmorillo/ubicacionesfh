@@ -18,6 +18,7 @@ Aplicación web estática para localizar rápidamente medicamentos en guardia (o
 - botón **Copiar ubicación** en cada tarjeta, con feedback visual breve
 - exploración rápida por ubicación con filtros dedicados y limpieza de filtro
 - bloque de metadatos del dataset (volumen indexado, fecha visible en cliente y origen)
+- integración con CIMA con resolución progresiva por CN a ficha técnica (con fallback seguro por búsqueda)
 
 ## Cómo generar el dataset
 

@@ -14,6 +14,8 @@ const metaUpdatedNode = document.getElementById('metaUpdated');
 
 let medicamentos = [];
 let selectedZone = '';
+const cimaResolutionCache = new Map();
+const cimaRequestCache = new Map();
 
 function normalize(text) {
   return (text || '')
@@ -178,11 +180,21 @@ function extractCodigoNacional(item) {
 }
 
 function buildCimaUrl(item) {
+  const directUrl = buildCimaDirectUrl(item.cima_nregistro || item.nregistro);
+  if (directUrl) {
+    return {
+      label: 'Ver ficha técnica',
+      href: directUrl,
+      isDirect: true,
+    };
+  }
+
   const cn = extractCodigoNacional(item);
   if (cn) {
     return {
-      label: 'Ver ficha técnica',
+      label: 'Buscar en CIMA',
       href: `https://cima.aemps.es/cima/publico/lista.html?keyword=${encodeURIComponent(cn)}`,
+      isDirect: false,
     };
   }
 
@@ -192,7 +204,92 @@ function buildCimaUrl(item) {
   return {
     label: 'Buscar en CIMA',
     href: `https://cima.aemps.es/cima/publico/lista.html?keyword=${encodeURIComponent(nombre)}`,
+    isDirect: false,
   };
+}
+
+function extractNregistroFromPayload(payload) {
+  if (!payload || typeof payload !== 'object') return '';
+
+  const queue = [payload];
+  while (queue.length) {
+    const current = queue.shift();
+    if (!current || typeof current !== 'object') continue;
+
+    const candidate = String(current.nregistro || '').trim();
+    if (candidate) return candidate;
+
+    for (const value of Object.values(current)) {
+      if (Array.isArray(value)) {
+        queue.push(...value);
+      } else if (value && typeof value === 'object') {
+        queue.push(value);
+      }
+    }
+  }
+
+  return '';
+}
+
+function buildCimaDirectUrl(nregistro) {
+  const code = String(nregistro || '').trim();
+  if (!code) return '';
+  return `https://cima.aemps.es/cima/dochtml/ft/${encodeURIComponent(code)}/FichaTecnica.html`;
+}
+
+async function resolveCimaNregistroByCn(cn) {
+  if (!cn) return '';
+  if (cimaResolutionCache.has(cn)) return cimaResolutionCache.get(cn);
+  if (cimaRequestCache.has(cn)) return cimaRequestCache.get(cn);
+
+  const request = (async () => {
+    const endpoints = [
+      `https://cima.aemps.es/cima/rest/medicamento?cn=${encodeURIComponent(cn)}`,
+      `https://cima.aemps.es/cima/rest/presentacion?cn=${encodeURIComponent(cn)}`,
+    ];
+
+    for (const endpoint of endpoints) {
+      try {
+        const response = await fetch(endpoint);
+        if (!response.ok) continue;
+
+        const payload = await response.json();
+        const nregistro = extractNregistroFromPayload(payload);
+        if (nregistro) {
+          cimaResolutionCache.set(cn, nregistro);
+          return nregistro;
+        }
+      } catch (error) {
+        console.warn('No se pudo resolver ficha técnica desde CIMA', { cn, endpoint, error });
+      }
+    }
+
+    cimaResolutionCache.set(cn, '');
+    return '';
+  })();
+
+  cimaRequestCache.set(cn, request);
+
+  try {
+    return await request;
+  } finally {
+    cimaRequestCache.delete(cn);
+  }
+}
+
+async function enhanceCimaButton(buttonNode, item) {
+  const cn = extractCodigoNacional(item);
+  if (!cn) return;
+
+  try {
+    const nregistro = await resolveCimaNregistroByCn(cn);
+    const directUrl = buildCimaDirectUrl(nregistro);
+    if (!directUrl || !buttonNode.isConnected) return;
+    buttonNode.textContent = 'Ver ficha técnica';
+    buttonNode.href = directUrl;
+  } catch (error) {
+    console.warn('No se pudo mejorar el enlace de CIMA', { cn, error });
+  }
 }
 
 function buildCopyText(item, parsedLocation, details) {
@@ -244,6 +341,9 @@ function render(items, query = '') {
     if (cimaLink) {
       cimaButton.textContent = cimaLink.label;
       cimaButton.href = cimaLink.href;
+      if (!cimaLink.isDirect) {
+        enhanceCimaButton(cimaButton, med);
+      }
     } else {
       cimaButton.remove();
     }
