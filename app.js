@@ -107,16 +107,6 @@ function dedupeForRender(items) {
   return Array.from(byKey.values());
 }
 
-function isSubsequence(query, text) {
-  let qi = 0;
-  let ti = 0;
-  while (qi < query.length && ti < text.length) {
-    if (query[qi] === text[ti]) qi += 1;
-    ti += 1;
-  }
-  return qi === query.length;
-}
-
 function scoreItem(item, normalizedQuery) {
   if (!normalizedQuery) return 0;
 
@@ -131,7 +121,6 @@ function scoreItem(item, normalizedQuery) {
   if (code.startsWith(normalizedQuery)) return 140;
   if (tokens.some((token) => token.startsWith(normalizedQuery))) return 120;
   if (text.includes(normalizedQuery)) return 100;
-  if (isSubsequence(normalizedQuery, name) || isSubsequence(normalizedQuery, text)) return 70;
 
   return 0;
 }
