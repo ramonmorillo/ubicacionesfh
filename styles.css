@@ -92,7 +92,7 @@ h1 { margin: .35rem 0 .2rem; }
   display: flex;
   justify-content: space-between;
   gap: .5rem;
-  align-items: baseline;
+  align-items: flex-start;
 }
 
 .card h2 {
@@ -101,14 +101,15 @@ h1 { margin: .35rem 0 .2rem; }
   color: #122743;
 }
 
-.codigo {
-  color: #6f8099;
-  font-size: .82rem;
+.card-meta {
+  margin-top: .55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
 }
 
-.badges { margin-top: .5rem; }
-
-.zona-badge {
+.zona-badge,
+.celda {
   display: inline-block;
   padding: .23rem .56rem;
   border-radius: 999px;
@@ -119,28 +120,33 @@ h1 { margin: .35rem 0 .2rem; }
   color: #21446f;
 }
 
+.celda {
+  background: #eef3fb;
+  color: #2e4667;
+}
+
 .zona-nevera { background: #d8f2ff; color: #005c88; }
 .zona-carrusel { background: #efe6ff; color: #5a2f9f; }
 .zona-pexternos { background: #e4f7e7; color: #1f6a34; }
 
-.card dl {
-  margin: .55rem 0 0;
-}
-
-.card dl div {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: .45rem;
-  margin: .22rem 0;
-}
-
-dt { font-weight: 700; color: #2b4568; }
-
-dd { margin: 0; }
-
-.highlight {
+.posicion-line {
+  margin: .6rem 0 0;
+  color: #1b3659;
   font-weight: 700;
-  color: #10345f;
+  display: flex;
+  gap: .35rem;
+}
+
+.posicion-label {
+  font-weight: 600;
+  color: #4a6282;
+}
+
+.codigo {
+  display: inline-block;
+  margin-top: .6rem;
+  color: #6f8099;
+  font-size: .75rem;
 }
 
 .empty-state {

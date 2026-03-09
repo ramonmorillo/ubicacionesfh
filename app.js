@@ -20,6 +20,34 @@ function prettyValue(value, fallback = 'No disponible') {
   return clean || fallback;
 }
 
+function hasUsefulValue(value) {
+  const clean = normalize(value);
+  return Boolean(clean) && clean !== 'no disponible';
+}
+
+function splitZoneAndCell(location) {
+  const clean = (location || '').trim();
+  if (!clean) {
+    return { zona: 'No disponible', celda: '' };
+  }
+
+  const normalized = normalize(clean);
+  const knownZones = ['nevera', 'carrusel', 'pacientes externos'];
+
+  for (const zone of knownZones) {
+    if (normalized === zone) {
+      return { zona: clean, celda: '' };
+    }
+
+    if (normalized.startsWith(`${zone} `) || normalized.startsWith(`${zone}-`) || normalized.startsWith(`${zone}/`) || normalized.startsWith(`${zone}:`)) {
+      const celda = clean.slice(zone.length).replace(/^[\s\-/:]+/, '').trim();
+      return { zona: clean.slice(0, zone.length).trim(), celda };
+    }
+  }
+
+  return { zona: clean, celda: '' };
+}
+
 function zoneClass(zone) {
   const key = normalize(zone);
   if (key.includes('nevera')) return 'zona-nevera';
@@ -78,16 +106,25 @@ function render(items, query = '') {
     card.querySelector('.nombre').textContent = prettyValue(med.nombre, '(Sin nombre)');
     card.querySelector('.codigo').textContent = `Código ${prettyValue(med.codigo)}`;
 
-    const zona = card.querySelector('.zona-badge');
-    zona.textContent = prettyValue(med.ubicacion);
-    const zClass = zoneClass(med.ubicacion);
-    if (zClass) zona.classList.add(zClass);
+    const { zona, celda } = splitZoneAndCell(med.ubicacion);
+    const zonaBadge = card.querySelector('.zona-badge');
+    zonaBadge.textContent = prettyValue(zona);
+    const zClass = zoneClass(zona);
+    if (zClass) zonaBadge.classList.add(zClass);
 
-    card.querySelector('.almacen').textContent = prettyValue(med.almacen);
-    card.querySelector('.ubicacion').textContent = prettyValue(med.ubicacion);
-    card.querySelector('.ubicacion').classList.add('highlight');
-    card.querySelector('.posicion').textContent = prettyValue(med.posicion);
-    card.querySelector('.posicion').classList.add('highlight');
+    const celdaNode = card.querySelector('.celda');
+    if (hasUsefulValue(celda)) {
+      celdaNode.textContent = `Celda ${celda.trim()}`;
+      celdaNode.hidden = false;
+    }
+
+    const posicionLine = card.querySelector('.posicion-line');
+    const posicionNode = card.querySelector('.posicion');
+    if (hasUsefulValue(med.posicion)) {
+      posicionNode.textContent = med.posicion.trim();
+      posicionLine.hidden = false;
+    }
+
     resultsNode.appendChild(card);
   }
 }
