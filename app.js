@@ -132,23 +132,6 @@ function formatDetails(item, parsedLocation) {
   return details;
 }
 
-async function copyToClipboard(text) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'absolute';
-  textarea.style.left = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-}
-
 
 function extractCodigoNacional(item) {
   const cnFields = [
@@ -281,13 +264,6 @@ async function enhanceCimaButton(buttonNode, item) {
   }
 }
 
-function buildCopyText(item, parsedLocation, details) {
-  const lines = [item.nombre || '(Sin nombre)', parsedLocation.zoneLabel];
-  if (details.length) lines.push(details.join(' · '));
-  if (isUseful(item.codigo)) lines.push(`Código: ${item.codigo.trim()}`);
-  return lines.join('\n');
-}
-
 function render(items, query = '') {
   resultsNode.innerHTML = '';
 
@@ -336,24 +312,6 @@ function render(items, query = '') {
     } else {
       cimaButton.remove();
     }
-
-    const copyButton = card.querySelector('.copy-button');
-    copyButton.addEventListener('click', async () => {
-      try {
-        await copyToClipboard(buildCopyText(med, parsedLocation, details));
-        copyButton.textContent = 'Copiado';
-        copyButton.classList.add('copied');
-        window.setTimeout(() => {
-          copyButton.textContent = 'Copiar ubicación';
-          copyButton.classList.remove('copied');
-        }, 1200);
-      } catch (error) {
-        copyButton.textContent = 'Error al copiar';
-        window.setTimeout(() => {
-          copyButton.textContent = 'Copiar ubicación';
-        }, 1200);
-      }
-    });
 
     resultsNode.appendChild(card);
   }

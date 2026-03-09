@@ -163,7 +163,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   gap: .55rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .card h2 {
@@ -175,10 +175,9 @@ h1 {
 
 .card-actions {
   display: flex;
-  gap: .34rem;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: flex-end;
+  margin-left: auto;
 }
 
 .cima-button {
@@ -198,22 +197,6 @@ h1 {
   background: #dce9fb;
 }
 
-.copy-button {
-  border: 1px solid #c8d5e8;
-  background: #f7f9fd;
-  color: #2f4a6f;
-  border-radius: 8px;
-  font-size: .73rem;
-  padding: .24rem .5rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.copy-button.copied {
-  background: #deefe2;
-  border-color: #8ec7a0;
-  color: #205a33;
-}
 
 .ubicacion-linea {
   margin: .45rem 0 0;
