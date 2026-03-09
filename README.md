@@ -10,6 +10,15 @@ Aplicación web estática para localizar rápidamente medicamentos en guardia (o
 - `index.html`, `app.js`, `styles.css` → frontend listo para GitHub Pages
 - `docs/dataset_structure.md` → documentación del esquema detectado
 
+## Funcionalidades operativas
+
+- búsqueda tolerante a mayúsculas, acentos, coincidencias parciales y errores leves de escritura (subsecuencia)
+- resultados con jerarquía visual enfocada en ubicación: nombre → zona → detalles (celda/posición) → código
+- badges claros por zona (`NEVERA`, `CARRUSEL`, `PACIENTES EXTERNOS`)
+- botón **Copiar ubicación** en cada tarjeta, con feedback visual breve
+- exploración rápida por ubicación con filtros dedicados y limpieza de filtro
+- bloque de metadatos del dataset (volumen indexado, fecha visible en cliente y origen)
+
 ## Cómo generar el dataset
 
 ```bash
@@ -39,5 +48,6 @@ Abrir: `http://localhost:8000`
 La búsqueda está optimizada para uso real durante turnos de noche:
 
 - búsqueda por código, nombre o ubicación
+- filtros rápidos por zona
 - respuesta inmediata en cliente (sin backend)
 - interfaz clara y táctil en móvil

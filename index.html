@@ -11,7 +11,7 @@
     <header class="app-header">
       <p class="institution">Servicio de Farmacia · AGS Sur de Sevilla</p>
       <h1>Localizador de Medicamentos</h1>
-      <p class="subtitle">Consulta rápida durante guardias nocturnas para ubicar medicamentos de forma fiable.</p>
+      <p class="subtitle">Localización rápida y fiable para guardias nocturnas del Servicio de Farmacia.</p>
     </header>
 
     <section class="search-box" aria-label="Buscador de medicamentos">
@@ -19,7 +19,24 @@
         <input id="searchInput" type="search" placeholder="Buscar por nombre, código o ubicación" autocomplete="off" />
         <button id="clearButton" type="button">Limpiar</button>
       </div>
-      <p id="resultsCount"></p>
+
+      <div class="zone-filters" aria-label="Exploración por ubicación">
+        <button class="zone-filter" type="button" data-zone="nevera">NEVERA</button>
+        <button class="zone-filter" type="button" data-zone="carrusel">CARRUSEL</button>
+        <button class="zone-filter" type="button" data-zone="pacientes externos">PACIENTES EXTERNOS</button>
+        <button id="clearZoneFilter" class="zone-filter clear-filter" type="button" hidden>Quitar filtro</button>
+      </div>
+
+      <div class="status-row">
+        <p id="resultsCount"></p>
+        <p id="activeFilters" class="active-filters"></p>
+      </div>
+    </section>
+
+    <section class="dataset-meta" aria-label="Información del dataset">
+      <p><strong>Medicamentos indexados:</strong> <span id="metaCount">-</span></p>
+      <p><strong>Última actualización:</strong> <span id="metaUpdated">No disponible</span></p>
+      <p><strong>Origen:</strong> Farmatools</p>
     </section>
 
     <section id="results" class="results"></section>
@@ -36,12 +53,10 @@
     <article class="card">
       <div class="card-top">
         <h2 class="nombre"></h2>
+        <button class="copy-button" type="button">Copiar ubicación</button>
       </div>
-      <div class="card-meta">
-        <span class="zona-badge"></span>
-        <span class="celda" hidden></span>
-      </div>
-      <p class="posicion-line" hidden><span class="posicion-label">Posición</span><span class="posicion"></span></p>
+      <p class="ubicacion-linea"><span class="pin">📍</span><span class="zona-badge"></span></p>
+      <p class="detalles-linea"></p>
       <span class="codigo"></span>
     </article>
   </template>

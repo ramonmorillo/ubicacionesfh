@@ -2,9 +2,15 @@ const input = document.getElementById('searchInput');
 const clearButton = document.getElementById('clearButton');
 const resultsNode = document.getElementById('results');
 const countNode = document.getElementById('resultsCount');
+const activeFiltersNode = document.getElementById('activeFilters');
 const template = document.getElementById('cardTemplate');
+const zoneButtons = Array.from(document.querySelectorAll('.zone-filter[data-zone]'));
+const clearZoneFilterButton = document.getElementById('clearZoneFilter');
+const metaCountNode = document.getElementById('metaCount');
+const metaUpdatedNode = document.getElementById('metaUpdated');
 
 let medicamentos = [];
+let selectedZone = '';
 
 function normalize(text) {
   return (text || '')
@@ -15,74 +21,145 @@ function normalize(text) {
     .trim();
 }
 
-function prettyValue(value, fallback = 'No disponible') {
-  const clean = (value || '').trim();
-  return clean || fallback;
+function canonicalZone(value) {
+  const key = normalize(value);
+  if (['nev', 'nevera'].includes(key)) return 'NEVERA';
+  if (['carr', 'carrusel'].includes(key)) return 'CARRUSEL';
+  if (['pext', 'pex', 'pacientes externos'].includes(key)) return 'PACIENTES EXTERNOS';
+  return (value || '').trim();
 }
 
-function hasUsefulValue(value) {
-  const clean = normalize(value);
-  return Boolean(clean) && clean !== 'no disponible';
-}
+function parseLocation(rawLocation) {
+  const clean = (rawLocation || '').trim();
+  if (!clean) return { zoneLabel: 'No disponible', cell: '' };
 
-function splitZoneAndCell(location) {
-  const clean = (location || '').trim();
-  if (!clean) {
-    return { zona: 'No disponible', celda: '' };
-  }
-
+  const canonical = canonicalZone(clean);
   const normalized = normalize(clean);
-  const knownZones = ['nevera', 'carrusel', 'pacientes externos'];
 
-  for (const zone of knownZones) {
-    if (normalized === zone) {
-      return { zona: clean, celda: '' };
-    }
-
-    if (normalized.startsWith(`${zone} `) || normalized.startsWith(`${zone}-`) || normalized.startsWith(`${zone}/`) || normalized.startsWith(`${zone}:`)) {
-      const celda = clean.slice(zone.length).replace(/^[\s\-/:]+/, '').trim();
-      return { zona: clean.slice(0, zone.length).trim(), celda };
-    }
+  if (normalized.startsWith('nevera') || normalized.startsWith('nev')) {
+    const cell = clean.replace(/^(nevera|nev)[\s\-/:]*/i, '').trim();
+    return { zoneLabel: 'NEVERA', cell };
+  }
+  if (normalized.startsWith('carrusel') || normalized.startsWith('carr')) {
+    const cell = clean.replace(/^(carrusel|carr)[\s\-/:]*/i, '').trim();
+    return { zoneLabel: 'CARRUSEL', cell };
+  }
+  if (normalized.startsWith('pacientes externos') || normalized.startsWith('pext') || normalized.startsWith('pex')) {
+    const cell = clean.replace(/^(pacientes externos|pext|pex)[\s\-/:]*/i, '').trim();
+    return { zoneLabel: 'PACIENTES EXTERNOS', cell };
   }
 
-  return { zona: clean, celda: '' };
+  return { zoneLabel: canonical || clean, cell: '' };
 }
 
-function zoneClass(zone) {
-  const key = normalize(zone);
+function isUseful(value) {
+  const key = normalize(value);
+  return key && key !== 'no disponible';
+}
+
+function hasUsefulPosition(value) {
+  const key = normalize(value);
+  return isUseful(value) && !['-', 's/n', 'sn'].includes(key);
+}
+
+function zoneClass(zoneLabel) {
+  const key = normalize(zoneLabel);
   if (key.includes('nevera')) return 'zona-nevera';
   if (key.includes('carrusel')) return 'zona-carrusel';
   if (key.includes('pacientes externos')) return 'zona-pexternos';
   return '';
 }
 
+function isGenericAlmacen(almacen) {
+  const key = normalize(almacen);
+  return !key || key === 'farmacia valme';
+}
+
+function buildSearchText(item) {
+  const parsed = parseLocation(item.ubicacion);
+  return normalize([
+    item.codigo,
+    item.nombre,
+    item.ubicacion,
+    parsed.zoneLabel,
+    parsed.cell,
+    hasUsefulPosition(item.posicion) ? item.posicion : '',
+  ].join(' '));
+}
+
 function dedupeForRender(items) {
   const byKey = new Map();
   for (const item of items) {
-    const key = [item.codigo, item.nombre, item.ubicacion, item.posicion].map(normalize).join('|');
+    const parsed = parseLocation(item.ubicacion);
+    const key = [item.codigo, item.nombre, parsed.zoneLabel, parsed.cell, item.posicion]
+      .map(normalize)
+      .join('|');
     const previous = byKey.get(key);
-    if (!previous || (!previous.almacen && item.almacen)) {
+    if (!previous || (isGenericAlmacen(previous.almacen) && !isGenericAlmacen(item.almacen))) {
       byKey.set(key, item);
     }
   }
   return Array.from(byKey.values());
 }
 
-function relevanceScore(item, query) {
-  const q = normalize(query);
+function isSubsequence(query, text) {
+  let qi = 0;
+  let ti = 0;
+  while (qi < query.length && ti < text.length) {
+    if (query[qi] === text[ti]) qi += 1;
+    ti += 1;
+  }
+  return qi === query.length;
+}
+
+function scoreItem(item, normalizedQuery) {
+  if (!normalizedQuery) return 0;
+
   const code = normalize(item.codigo);
   const name = normalize(item.nombre);
-  const zone = normalize(item.ubicacion);
-  const text = normalize(item.searchText);
+  const text = buildSearchText(item);
+  const tokens = text.split(' ').filter(Boolean);
 
-  if (!q) return 0;
-  if (code === q) return 120;
-  if (name === q) return 110;
-  if (name.startsWith(q)) return 90;
-  if (code.startsWith(q)) return 85;
-  if (zone.startsWith(q)) return 70;
-  if (text.includes(q)) return 55;
+  if (code === normalizedQuery) return 180;
+  if (name === normalizedQuery) return 170;
+  if (name.startsWith(normalizedQuery)) return 150;
+  if (code.startsWith(normalizedQuery)) return 140;
+  if (tokens.some((token) => token.startsWith(normalizedQuery))) return 120;
+  if (text.includes(normalizedQuery)) return 100;
+  if (isSubsequence(normalizedQuery, name) || isSubsequence(normalizedQuery, text)) return 70;
+
   return 0;
+}
+
+function formatDetails(item, parsedLocation) {
+  const details = [];
+  if (isUseful(parsedLocation.cell)) details.push(`Celda ${parsedLocation.cell}`);
+  if (hasUsefulPosition(item.posicion)) details.push(`Posición ${item.posicion.trim()}`);
+  return details;
+}
+
+async function copyToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+}
+
+function buildCopyText(item, parsedLocation, details) {
+  const lines = [item.nombre || '(Sin nombre)', parsedLocation.zoneLabel];
+  if (details.length) lines.push(details.join(' · '));
+  if (isUseful(item.codigo)) lines.push(`Código: ${item.codigo.trim()}`);
+  return lines.join('\n');
 }
 
 function render(items, query = '') {
@@ -101,59 +178,129 @@ function render(items, query = '') {
 
   countNode.textContent = `${items.length} resultado(s)`;
 
-  for (const med of items.slice(0, 150)) {
+  for (const med of items.slice(0, 200)) {
+    const parsedLocation = parseLocation(med.ubicacion);
+    const details = formatDetails(med, parsedLocation);
+
     const card = template.content.firstElementChild.cloneNode(true);
-    card.querySelector('.nombre').textContent = prettyValue(med.nombre, '(Sin nombre)');
-    card.querySelector('.codigo').textContent = `Código ${prettyValue(med.codigo)}`;
+    card.querySelector('.nombre').textContent = (med.nombre || '').trim() || '(Sin nombre)';
 
-    const { zona, celda } = splitZoneAndCell(med.ubicacion);
-    const zonaBadge = card.querySelector('.zona-badge');
-    zonaBadge.textContent = prettyValue(zona);
-    const zClass = zoneClass(zona);
-    if (zClass) zonaBadge.classList.add(zClass);
+    const zoneBadge = card.querySelector('.zona-badge');
+    zoneBadge.textContent = parsedLocation.zoneLabel;
+    const badgeClass = zoneClass(parsedLocation.zoneLabel);
+    if (badgeClass) zoneBadge.classList.add(badgeClass);
 
-    const celdaNode = card.querySelector('.celda');
-    if (hasUsefulValue(celda)) {
-      celdaNode.textContent = `Celda ${celda.trim()}`;
-      celdaNode.hidden = false;
+    const detailsNode = card.querySelector('.detalles-linea');
+    if (details.length) {
+      detailsNode.textContent = details.join(' · ');
+    } else {
+      detailsNode.remove();
     }
 
-    const posicionLine = card.querySelector('.posicion-line');
-    const posicionNode = card.querySelector('.posicion');
-    if (hasUsefulValue(med.posicion)) {
-      posicionNode.textContent = med.posicion.trim();
-      posicionLine.hidden = false;
-    }
+    card.querySelector('.codigo').textContent = `Código ${med.codigo || 'No disponible'}`;
+
+    const copyButton = card.querySelector('.copy-button');
+    copyButton.addEventListener('click', async () => {
+      try {
+        await copyToClipboard(buildCopyText(med, parsedLocation, details));
+        copyButton.textContent = 'Copiado';
+        copyButton.classList.add('copied');
+        window.setTimeout(() => {
+          copyButton.textContent = 'Copiar ubicación';
+          copyButton.classList.remove('copied');
+        }, 1200);
+      } catch (error) {
+        copyButton.textContent = 'Error al copiar';
+        window.setTimeout(() => {
+          copyButton.textContent = 'Copiar ubicación';
+        }, 1200);
+      }
+    });
 
     resultsNode.appendChild(card);
   }
 }
 
-function search() {
+function updateActiveFiltersText() {
+  const labels = [];
+  const q = input.value.trim();
+  if (q) labels.push(`Texto: “${q}”`);
+  if (selectedZone) labels.push(`Zona: ${selectedZone}`);
+  activeFiltersNode.textContent = labels.length ? `Filtros activos · ${labels.join(' · ')}` : '';
+}
+
+function applySearchAndFilters() {
   const query = normalize(input.value);
+  let filtered = medicamentos;
+
+  if (selectedZone) {
+    filtered = filtered.filter((item) => normalize(parseLocation(item.ubicacion).zoneLabel) === normalize(selectedZone));
+  }
+
   if (!query) {
-    render(dedupeForRender(medicamentos));
+    const deduped = dedupeForRender(filtered);
+    render(deduped);
+    updateActiveFiltersText();
     return;
   }
 
-  const ranked = medicamentos
-    .map((item) => ({ item, score: relevanceScore(item, query) }))
+  const ranked = filtered
+    .map((item) => ({ item, score: scoreItem(item, query) }))
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score || normalize(a.item.nombre).localeCompare(normalize(b.item.nombre)));
 
   render(dedupeForRender(ranked.map((entry) => entry.item)), input.value.trim());
+  updateActiveFiltersText();
+}
+
+function setZoneFilter(zoneLabel) {
+  selectedZone = zoneLabel;
+  clearZoneFilterButton.hidden = false;
+
+  zoneButtons.forEach((button) => {
+    button.classList.toggle('active', normalize(button.dataset.zone) === normalize(zoneLabel));
+  });
+
+  applySearchAndFilters();
+}
+
+function clearZoneFilter() {
+  selectedZone = '';
+  clearZoneFilterButton.hidden = true;
+  zoneButtons.forEach((button) => button.classList.remove('active'));
+  applySearchAndFilters();
+}
+
+function updateDatasetMeta() {
+  metaCountNode.textContent = String(medicamentos.length);
+
+  const fileInfoDate = document.lastModified ? new Date(document.lastModified) : null;
+  if (fileInfoDate && !Number.isNaN(fileInfoDate.getTime())) {
+    metaUpdatedNode.textContent = fileInfoDate.toLocaleDateString('es-ES');
+  }
 }
 
 async function main() {
   const response = await fetch('data/processed/medicamentos.json');
   medicamentos = await response.json();
-  render(dedupeForRender(medicamentos));
-  input.addEventListener('input', search);
+
+  updateDatasetMeta();
+  applySearchAndFilters();
+
+  input.addEventListener('input', applySearchAndFilters);
   clearButton.addEventListener('click', () => {
     input.value = '';
     input.focus();
-    render(dedupeForRender(medicamentos));
+    applySearchAndFilters();
   });
+
+  zoneButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      setZoneFilter(canonicalZone(button.dataset.zone));
+    });
+  });
+
+  clearZoneFilterButton.addEventListener('click', clearZoneFilter);
 }
 
 main().catch((err) => {
