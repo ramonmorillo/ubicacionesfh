@@ -6,6 +6,9 @@ const activeFiltersNode = document.getElementById('activeFilters');
 const template = document.getElementById('cardTemplate');
 const zoneButtons = Array.from(document.querySelectorAll('.zone-filter[data-zone]'));
 const clearZoneFilterButton = document.getElementById('clearZoneFilter');
+const searchPromptNode = document.getElementById('searchPrompt');
+const statusRowNode = document.querySelector('.status-row');
+const datasetMetaNode = document.querySelector('.dataset-meta');
 const metaCountNode = document.getElementById('metaCount');
 const metaUpdatedNode = document.getElementById('metaUpdated');
 
@@ -231,6 +234,19 @@ function updateActiveFiltersText() {
 
 function applySearchAndFilters() {
   const query = normalize(input.value);
+  const hasActiveFilters = Boolean(query || selectedZone);
+
+  statusRowNode.hidden = !hasActiveFilters;
+  datasetMetaNode.hidden = !hasActiveFilters;
+  searchPromptNode.hidden = hasActiveFilters;
+
+  if (!hasActiveFilters) {
+    resultsNode.innerHTML = '';
+    countNode.textContent = '';
+    activeFiltersNode.textContent = '';
+    return;
+  }
+
   let filtered = medicamentos;
 
   if (selectedZone) {
