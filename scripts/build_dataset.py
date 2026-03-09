@@ -244,6 +244,7 @@ def load_rows(path: Path) -> List[Dict[str, str]]:
 
 def extract_cn(record: Dict[str, str]) -> str:
     cn_fields = [
+        'codigo',
         'codigo_nacional',
         'cod_nacional',
         'cn',
