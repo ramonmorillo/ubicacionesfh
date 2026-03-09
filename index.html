@@ -8,26 +8,42 @@
 </head>
 <body>
   <main class="container">
-    <header>
+    <header class="app-header">
+      <p class="institution">Servicio de Farmacia · AGS Sur de Sevilla</p>
       <h1>Localizador de Medicamentos</h1>
-      <p>Busca por código, nombre o ubicación para localizar rápido durante guardia.</p>
+      <p class="subtitle">Consulta rápida durante guardias nocturnas para ubicar medicamentos de forma fiable.</p>
     </header>
 
-    <section class="search-box">
-      <input id="searchInput" type="search" placeholder="Ej: adalimumab, 954065, NEVERAT..." autocomplete="off" />
+    <section class="search-box" aria-label="Buscador de medicamentos">
+      <div class="search-row">
+        <input id="searchInput" type="search" placeholder="Buscar por nombre, código o ubicación" autocomplete="off" />
+        <button id="clearButton" type="button">Limpiar</button>
+      </div>
       <p id="resultsCount"></p>
     </section>
 
     <section id="results" class="results"></section>
   </main>
 
+  <footer class="app-footer">
+    <p>Servicio de Farmacia del AGS Sur de Sevilla</p>
+    <p>Creado por Ramón Morillo · Marzo 2026</p>
+    <p>Herramienta de uso interno basada en exportaciones del maestro de artículos de Farmatools</p>
+    <p>Verificar siempre ante cambios recientes no actualizados en la exportación</p>
+  </footer>
+
   <template id="cardTemplate">
     <article class="card">
-      <h2 class="nombre"></h2>
+      <div class="card-top">
+        <h2 class="nombre"></h2>
+        <span class="codigo"></span>
+      </div>
+      <div class="badges">
+        <span class="zona-badge"></span>
+      </div>
       <dl>
-        <div><dt>Código</dt><dd class="codigo"></dd></div>
         <div><dt>Almacén</dt><dd class="almacen"></dd></div>
-        <div><dt>Ubicación</dt><dd class="ubicacion"></dd></div>
+        <div><dt>Ubicación/Celda</dt><dd class="ubicacion"></dd></div>
         <div><dt>Posición</dt><dd class="posicion"></dd></div>
       </dl>
     </article>
