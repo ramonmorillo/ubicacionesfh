@@ -109,6 +109,13 @@ h1 {
   color: #4f627f;
 }
 
+
+.search-prompt {
+  margin: .5rem 0 0;
+  color: #3d5371;
+  font-size: .86rem;
+}
+
 .status-row {
   margin-top: .42rem;
   display: flex;
